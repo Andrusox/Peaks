@@ -14,6 +14,8 @@ struct Graph{
 // inizializzazione
 int link, from, to,n, source, destination;
 Graph* g;
+list<int> lsttemp;
+vector<int> visita;
 
 // ###############################################################################################################
 
@@ -65,7 +67,7 @@ bool isReachable(int s, int d){
         // If a adjacent has not been visited, then mark it visited
         // and enqueue it
         for (i = g->adj[s].begin(); i != g->adj[s].end(); ++i){
-
+            
             // If this adjacent node is the destination node, then return true
             if (*i == d){
                 delete [] visited;
@@ -86,6 +88,31 @@ bool isReachable(int s, int d){
 
 
 //inserire una funzione vector FindPath(grafo,punto a, punto b)
+
+void findAllPaths(int start, int finish){
+
+        list<int> lst = returnList(start);
+        if(lst.size() > 0){
+            //lsttemp.push_back(start);
+            /*if(start == finish){
+                return
+            } 
+            */       
+            cout << "Itero su elementi adiacenti di " << start << endl;
+            for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
+                int node = *it;
+                cout << start <<" -> " << node << endl;
+                if(node == finish){
+                    cout << "Fine sono arrivato a destinazione!" << endl;
+                    cout << endl;
+                    return;
+                }else{
+                    findAllPaths(node,finish);
+                }
+            }
+        }
+}
+
 
 // ###############################################################################################################
 
@@ -111,12 +138,17 @@ int main(int argc, char *argv[]){
     }
     in.close();
 
-    list<int> lst = returnList(source);
-    if(lst.size() > 0){
-        cout << "La sorgente ha una lista di nodi di adiacenza che sono: " << endl;
-        for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
-            int node = *it;
-            cout << node << endl;
+    for(int i=0; i<n; i++){
+        list<int> lst = returnList(i);
+        if(lst.size() > 0){
+            cout << "Nodo " << i <<" ha una lista di nodi di adiacenza che sono: ";
+            for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
+                int node = *it;
+                cout << node << "  ";
+            }
+            cout << endl;
+        }else{
+            cout << "Nodo " << i <<" non ha una lista di nodi di adiacenza!" << endl;
         }
     }
 
@@ -128,7 +160,12 @@ int main(int argc, char *argv[]){
         }
     }
 
+<<<<<<< Updated upstream
     // bisogna delittare i vector sosi ?!
+=======
+    //findAllPaths(source,destination);
+    
+>>>>>>> Stashed changes
     // apro il file in scrittura
     ofstream outf;
     outf.open("output.txt");
