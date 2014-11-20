@@ -106,6 +106,43 @@ void findAllPaths(int start, int finish){
         }
 }
 
+void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> tmp)
+{
+    tmp.push_back(start);
+
+    list<int> lst = returnList(start);
+
+    if(lst.size() == 0) {
+        all_paths.push_back(tmp);
+        return;
+    }
+
+    for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
+        int node = *it;
+        vector <int> tmp2(tmp);
+        FindAllPathsAt(node, all_paths, tmp2);
+    }
+}
+
+
+void PrintPaths(const vector < vector<int> > &all_paths) 
+{    
+    for(size_t i=0; i < all_paths.size(); i++) {
+        // Don't print node if it points to nothing
+        if(all_paths[i].size() == 1) {
+            continue;
+        }
+
+        cout << all_paths[i][0];
+    
+        for(size_t j=1; j < all_paths[i].size(); j++) {
+            cout << " -- > " << all_paths[i][j];
+        }
+
+        cout << endl;
+    }
+}
+
 
 // ###############################################################################################################
 
@@ -147,8 +184,6 @@ int main(int argc, char *argv[]){
         }
     }
     
-
-
     //fornisce la lista dei nemici
     for(int i=0; i<link; i++){
         if(isReachable(a[i], da[i]) == 0){
@@ -156,16 +191,26 @@ int main(int argc, char *argv[]){
         	cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " << isReachable(a[i], da[i]) << endl;
         }
     }
-    
-
 	
-    findAllPaths(source,destination);
+    //findAllPaths(source,destination);
+
+    vector <int> tmp; // work space
+
+    //for(size_t i=0; i < n; i++) {
+        vector < vector<int> > all_paths;
+        FindAllPathsAt(source, all_paths, tmp);
+
+        cout << "All paths at node " << source << endl;
+        PrintPaths(all_paths);
+    //}
     
     // apro il file in scrittura
+    
     ofstream outf;
     outf.open("output.txt");
     outf << path << endl;
     outf.close();
+    
 }
 
 // ###############################################################################################################
