@@ -93,7 +93,7 @@ bool isReachable(int s, int d){
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input0.txt");
+    ifstream in ("inputenemy.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
@@ -120,11 +120,15 @@ int main(int argc, char *argv[]){
         }
     }
 
+    //fornisce la lista dei nemici
     for(int i=0; i<link; i++){
+        if(isReachable(a[i], da[i]) == 0){
+            // qui vanno salvati in memoria invece che sputati fuori
         cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " <<isReachable(a[i], da[i]) << endl;
+        }
     }
 
-
+    // bisogna delittare i vector sosi ?!
     // apro il file in scrittura
     ofstream outf;
     outf.open("output.txt");
