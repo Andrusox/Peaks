@@ -12,10 +12,9 @@ struct Graph{
 };
 
 // inizializzazione
-int link, from, to,n, source, destination;
+int link, from, to,n, source, destination, path;
+int** enemy;
 Graph* g;
-list<int> lsttemp;
-vector<int> visita;
 
 // ###############################################################################################################
 
@@ -87,25 +86,19 @@ bool isReachable(int s, int d){
 }
 
 
-//inserire una funzione vector FindPath(grafo,punto a, punto b)
-
 void findAllPaths(int start, int finish){
 
         list<int> lst = returnList(start);
-        if(lst.size() > 0){
-            //lsttemp.push_back(start);
-            /*if(start == finish){
-                return
-            } 
-            */       
+        if(lst.size() > 0){     
             cout << "Itero su elementi adiacenti di " << start << endl;
             for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
                 int node = *it;
                 cout << start <<" -> " << node << endl;
                 if(node == finish){
+                    path++;
                     cout << "Fine sono arrivato a destinazione!" << endl;
                     cout << endl;
-                    return;
+                    //return;
                 }else{
                     findAllPaths(node,finish);
                 }
@@ -120,27 +113,29 @@ void findAllPaths(int start, int finish){
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("inputenemy.txt");
+    ifstream in ("input.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
     init(n);
 
-    vector<int> da;
-    vector<int> a;
+    //vector<int> da;
+    //vector<int> a;
 
     // leggo elementi e creo le liste di adiacenza
     while(!in.eof()){
         in >> from >> to;
-        da.push_back(from);
-        a.push_back(to);
+       //da.push_back(from);
+        //a.push_back(to);
         addEdge(from, to);
     }
     in.close();
-
+    /*
     for(int i=0; i<n; i++){
+        cout << "Stampo contatore: " << i << endl;
         list<int> lst = returnList(i);
         if(lst.size() > 0){
+            cout << "La size della lista di "<< i << " è: " << lst.size() << endl;
             cout << "Nodo " << i <<" ha una lista di nodi di adiacenza che sono: ";
             for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
                 int node = *it;
@@ -151,25 +146,33 @@ int main(int argc, char *argv[]){
             cout << "Nodo " << i <<" non ha una lista di nodi di adiacenza!" << endl;
         }
     }
+    */
+
+    enemy = new int*[n];
+
+    // inizializzazione matrice collegamenti tutta a 0
+    for(int row=0;row<n;row++){
+        for(int col=0;col<n;col++){
+            enemy[row][col] = 0;
+        }
+    }
 
     //fornisce la lista dei nemici
     for(int i=0; i<link; i++){
         if(isReachable(a[i], da[i]) == 0){
             // qui vanno salvati in memoria invece che sputati fuori
-        cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " <<isReachable(a[i], da[i]) << endl;
+        	cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " <<isReachable(a[i], da[i]) << endl;
         }
     }
-
-<<<<<<< Updated upstream
-    // bisogna delittare i vector sosi ?!
-=======
-    //findAllPaths(source,destination);
     
->>>>>>> Stashed changes
+
+
+    findAllPaths(source,destination);
+    
     // apro il file in scrittura
     ofstream outf;
     outf.open("output.txt");
-    //outf << ragg << endl;
+    outf << path << endl;
     outf.close();
 }
 
