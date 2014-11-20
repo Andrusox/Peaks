@@ -90,25 +90,42 @@ bool isReachable(int s, int d){
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input.txt");
+    ifstream in ("input0.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
     init(n);
 
+    vector<int> da;
+    vector<int> a;
+
     // leggo elementi e creo le liste di adiacenza
     while(!in.eof()){
         in >> from >> to;
+        da.push_back(from);
+        a.push_back(to);
         addEdge(from, to);
     }
     in.close();
 
-    bool ragg = isReachable(source, destination);
+    list<int> lst = returnList(source);
+    if(lst.size() > 0){
+        cout << "La sorgente ha una lista di nodi di adiacenza che sono: " << endl;
+        for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it){
+            int node = *it;
+            cout << node << endl;
+        }
+    }
+
+    for(int i=0; i<link; i++){
+        cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " <<isReachable(a[i], da[i]) << endl;
+    }
+
 
     // apro il file in scrittura
     ofstream outf;
     outf.open("output.txt");
-    outf << ragg << endl;
+    //outf << ragg << endl;
     outf.close();
 }
 
