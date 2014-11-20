@@ -11,6 +11,7 @@ struct Graph{
     list<int> *adj;
 };
 
+// inizializzazione
 int link, from, to,n, source, destination;
 Graph* g;
 
