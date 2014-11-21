@@ -87,25 +87,25 @@ bool isReachable(int s, int d){
 
 
 
-void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> tmp, int fine)
+void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int> tmp,*/ int fine)
 {
-    tmp.push_back(start);
+    //tmp.push_back(start);
 
     list<int> lst = returnList(start);
 
     if(lst.size() == 0) {
-        all_paths.push_back(tmp);
+        //all_paths.push_back(tmp);
         return;
     }
 
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
         int node = *it;
-        vector <int> tmp2(tmp);
+        //vector <int> tmp2(tmp);
         if (*(it++) == fine) {
             path++;
         }
         it--;
-        FindAllPathsAt(node, all_paths, tmp2, fine);
+        FindAllPathsAt(node, /*all_paths, tmp,*/ fine);
     }
 }
 
@@ -140,11 +140,11 @@ int main(int argc, char *argv[]){
 	
     //findAllPaths(source,destination);
 
-    vector <int> tmp; // work space
+   // vector <int> tmp; // work space
 
     //for(size_t i=0; i < n; i++) {
-        vector < vector<int> > all_paths;
-        FindAllPathsAt(source, all_paths, tmp, destination);
+        //vector < vector<int> > all_paths;
+        FindAllPathsAt(source, /*all_paths, tmp,*/ destination);
 
        // cout << "i percorsi sono " << path;
     //}
