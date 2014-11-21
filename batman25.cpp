@@ -101,9 +101,10 @@ void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> t
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
         int node = *it;
         vector <int> tmp2(tmp);
-        if (node == fine) {
+        if (*(it++) == fine) {
             path++;
         }
+        it--;
         FindAllPathsAt(node, all_paths, tmp2, fine);
     }
 }
@@ -117,7 +118,7 @@ void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> t
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input0.txt");
+    ifstream in ("input.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
