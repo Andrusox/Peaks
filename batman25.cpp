@@ -90,6 +90,10 @@ bool isReachable(int s, int d){
 void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int> tmp,*/ int fine)
 {
     //tmp.push_back(start);
+    if(start==fine){
+        path=1;
+        return;
+    }
 
     list<int> lst = returnList(start);
 
