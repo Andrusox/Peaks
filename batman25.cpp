@@ -15,6 +15,7 @@ struct Graph{
 int link, from, to,n, source, destination, path;
 int** enemy;
 Graph* g;
+vector<int> visitati;
 
 // ###############################################################################################################
 
@@ -90,26 +91,30 @@ bool isReachable(int s, int d){
 void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int> tmp,*/ int fine)
 {
     //tmp.push_back(start);
-    if(start==fine){
-        path=1;
-        return;
-    }
-
+    cout << " " << start << " ";
     list<int> lst = returnList(start);
+    
 
     if(lst.size() == 0) {
         //all_paths.push_back(tmp);
+        cout << "esco " << endl;
         return;
     }
-
+    
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
-        int node = *it;
+        int node = *it;  
         //vector <int> tmp2(tmp);
-        if (*(it++) == fine) {
-            path++;
-        }
-        it--;
-        FindAllPathsAt(node, /*all_paths, tmp,*/ fine);
+            if (node == fine) {
+                path++;
+                cout << endl;
+            }else{    
+                //if(visitati[node]==0){
+                   // visitati[start]=1;
+                    FindAllPathsAt(node, /*all_paths, tmp,*/ fine);
+               // }
+                }
+            
+        
     }
 }
 
@@ -122,26 +127,28 @@ void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int>
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input.txt");
+    ifstream in ("input00.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
     init(n);
     
-    vector<int> da;
-    vector<int> a;
+   // vector<int> da;
+   //s vector<int> a;
 
     // leggo elementi e creo le liste di adiacenza
     while(!in.eof()){
         in >> from >> to;
-       	da.push_back(from);
-        a.push_back(to);
+       //	da.push_back(from);
+        //a.push_back(to);
         addEdge(from, to);
     }
     in.close();
     
 
-	
+	for(int i=0; i<n ;i++){
+        visitati.push_back(0);
+    }
     //findAllPaths(source,destination);
 
    // vector <int> tmp; // work space
