@@ -106,7 +106,7 @@ void findAllPaths(int start, int finish){
         }
 }
 
-void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> tmp)
+void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> tmp, int fine)
 {
     tmp.push_back(start);
 
@@ -120,7 +120,10 @@ void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> t
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
         int node = *it;
         vector <int> tmp2(tmp);
-        FindAllPathsAt(node, all_paths, tmp2);
+        if (node == fine) {
+            path++;
+        }
+        FindAllPathsAt(node, all_paths, tmp2, fine);
     }
 }
 
@@ -198,10 +201,11 @@ int main(int argc, char *argv[]){
 
     //for(size_t i=0; i < n; i++) {
         vector < vector<int> > all_paths;
-        FindAllPathsAt(source, all_paths, tmp);
+        FindAllPathsAt(source, all_paths, tmp, destination);
 
         cout << "All paths at node " << source << endl;
         PrintPaths(all_paths);
+        cout << "i percorsi sono " << path;
     //}
     
     // apro il file in scrittura
