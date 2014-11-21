@@ -117,7 +117,7 @@ void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> t
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input.txt");
+    ifstream in ("input0.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
@@ -145,7 +145,7 @@ int main(int argc, char *argv[]){
         vector < vector<int> > all_paths;
         FindAllPathsAt(source, all_paths, tmp, destination);
 
-        cout << "i percorsi sono " << path;
+       // cout << "i percorsi sono " << path;
     //}
     
     // apro il file in scrittura
