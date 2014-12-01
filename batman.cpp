@@ -2,6 +2,8 @@
 #include <list>
 #include <fstream> 
 #include <vector>
+#include <map>
+#include <string>
 using namespace std;
 
 // ###############################################################################################################
@@ -15,6 +17,11 @@ struct Graph{
 int link, from, to,n, source, destination, path;
 int** enemy;
 Graph* g;
+
+typedef std::pair< int, int> Link; //definisce arco
+typedef std::vector<int> Path;  //definisce percorso
+typedef std::vector<Path> PathSet; //definisce serie di percorsi
+typedef std::vector<Path>::const_iterator Paths; //bho non so cosa voglia dire
 
 // ###############################################################################################################
 
@@ -146,7 +153,13 @@ int main(int argc, char *argv[]){
             cout << "Nodo " << i <<" non ha una lista di nodi di adiacenza!" << endl;
         }
     }
+<<<<<<< Updated upstream
     
+=======
+    */
+
+   /* enemy = new int*[n];
+>>>>>>> Stashed changes
 
 
     //fornisce la lista dei nemici
@@ -156,11 +169,17 @@ int main(int argc, char *argv[]){
         	cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " << isReachable(a[i], da[i]) << endl;
         }
     }
+
+<<<<<<< Updated upstream
+	
+=======
+    */
     
 
-	
+>>>>>>> Stashed changes
     findAllPaths(source,destination);
     
+
     // apro il file in scrittura
     ofstream outf;
     outf.open("output.txt");

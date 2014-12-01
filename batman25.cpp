@@ -91,29 +91,33 @@ bool isReachable(int s, int d){
 void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int> tmp,*/ int fine)
 {
     //tmp.push_back(start);
-    cout << " " << start << " ";
+    //cout << " " << start << " ";
     list<int> lst = returnList(start);
     
 
     if(lst.size() == 0) {
         //all_paths.push_back(tmp);
-        cout << "esco " << endl;
+       // cout << "esco " << endl;
+        visitati[start]=1;
         return;
     }
     
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
         int node = *it;  
         //vector <int> tmp2(tmp);
+        if (isReachable(node,fine))
+        {
             if (node == fine) {
                 path++;
-                cout << endl;
+               // cout << endl;
             }else{    
-                //if(visitati[node]==0){
+                if(visitati[node]==0){
                    // visitati[start]=1;
                     FindAllPathsAt(node, /*all_paths, tmp,*/ fine);
-               // }
+                 }
                 }
-            
+        
+        }   
         
     }
 }
@@ -127,7 +131,7 @@ void FindAllPathsAt(int start, /*vector < vector<int> > &all_paths, vector <int>
 int main(int argc, char *argv[]){
 
     // apro il file input in lettura
-    ifstream in ("input00.txt");
+    ifstream in ("input.txt");
     in >> n >> link >> source >> destination;
 
     // inizializzo la struct Graph
@@ -155,6 +159,7 @@ int main(int argc, char *argv[]){
 
     //for(size_t i=0; i < n; i++) {
         //vector < vector<int> > all_paths;
+        isReachable(source,destination);
         FindAllPathsAt(source, /*all_paths, tmp,*/ destination);
 
        // cout << "i percorsi sono " << path;

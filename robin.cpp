@@ -12,7 +12,7 @@ struct Graph{
 };
 
 // inizializzazione
-int link, from, to,n, source, destination, path;
+int link, from, to,n, source, destination, path, numeroPercorsi,counter;;
 int** enemy;
 Graph* g;
 
@@ -106,8 +106,14 @@ void findAllPaths(int start, int finish){
         }
 }
 
+<<<<<<< Updated upstream
 void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> tmp, int fine)
 {
+=======
+void FindAllPathsAt(int start, int arrivo, vector < vector<int> > &all_paths, vector <int> tmp)
+{   
+    
+>>>>>>> Stashed changes
     tmp.push_back(start);
 
     list<int> lst = returnList(start);
@@ -120,10 +126,18 @@ void FindAllPathsAt(int start, vector < vector<int> > &all_paths, vector <int> t
     for(list<int>::iterator it=lst.begin(); it != lst.end(); ++it) {
         int node = *it;
         vector <int> tmp2(tmp);
+<<<<<<< Updated upstream
         if (node == fine) {
             path++;
         }
         FindAllPathsAt(node, all_paths, tmp2, fine);
+=======
+        if ( *(it++) == arrivo)
+        {
+           counter++;
+        }
+        FindAllPathsAt(node,arrivo, all_paths, tmp2);
+>>>>>>> Stashed changes
     }
 }
 
@@ -170,7 +184,7 @@ int main(int argc, char *argv[]){
         addEdge(from, to);
     }
     in.close();
-    
+/*
     for(int i=0; i<n; i++){
         cout << "Stampo contatore: " << i << endl;
         list<int> lst = returnList(i);
@@ -194,26 +208,34 @@ int main(int argc, char *argv[]){
         	cout << "Da nodo " << a[i] << " a nodo " << da[i] << " è: " << isReachable(a[i], da[i]) << endl;
         }
     }
-	
+	*/
     //findAllPaths(source,destination);
 
     vector <int> tmp; // work space
 
     //for(size_t i=0; i < n; i++) {
         vector < vector<int> > all_paths;
+<<<<<<< Updated upstream
         FindAllPathsAt(source, all_paths, tmp, destination);
 
         cout << "All paths at node " << source << endl;
         PrintPaths(all_paths);
         cout << "i percorsi sono " << path;
+=======
+       FindAllPathsAt(source, destination, all_paths, tmp);
+
+        //cout << "All paths at node " << source << endl;
+       // PrintPaths(all_paths);
+>>>>>>> Stashed changes
     //}
     
     // apro il file in scrittura
     
     ofstream outf;
     outf.open("output.txt");
-    outf << path << endl;
+    outf << counter << endl;
     outf.close();
+    return 0;
     
 }
 
