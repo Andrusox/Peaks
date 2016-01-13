@@ -1,2 +1,2 @@
 # Peaks
-Repository privata per il progetto di algoritmi #2
+Repository per il progetto di algoritmi #2
